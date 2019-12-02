@@ -25,7 +25,9 @@ install_apps_if_not_exists git python3-pip
 # GPIO
 install_apps_if_not_exists python3-rpi.gpio
 # OLED DISPLAY LIB
-install_apps_if_not_exists python3-dev python-smbus i2c-tools python3-pil python3-setuptools
+install_apps_if_not_exists python3-dev python3-setuptools
+install_apps_if_not_exists libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms1-dev libwebp-dev tcl8.5-dev tk8.5-dev
+install_python_module_if_not_exists Pillow adafruit_circuitpython_ssd1306
 # PROJECT LIBS
 install_python_module_if_not_exists click asyncio bleak
 
@@ -41,16 +43,6 @@ if [ ! -d "py9b" ]; then
   git clone https://github.com/mzweigert/py9b
 else
   command cd py9b
-  git pull
-  cd ..
-fi
-
-if [ ! -d "Adafruit_Python_SSD1306" ]; then
-  git clone https://github.com/adafruit/Adafruit_Python_SSD1306
-  command cd Adafruit_Python_SSD1306
-  sudo python3 setup.py install
-else
-  command cd Adafruit_Python_SSD1306
   git pull
   cd ..
 fi
