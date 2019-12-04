@@ -1,1 +1,1 @@
-sudo python3 "$1"/lib/py9b/xiaomi_ble_cli.py info
+sudo python3 "$1"/src/main.py
