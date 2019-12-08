@@ -31,18 +31,19 @@ install_python_module_if_not_exists Pillow adafruit_circuitpython_ssd1306
 # PROJECT LIBS
 install_python_module_if_not_exists click asyncio bleak
 
-if [ ! -d "$PROJECT_DIR" ]; then
-    mkdir "$PROJECT_DIR"
-    command cd "$PROJECT_DIR"
-    mkdir lib
+if [ ! -d "$PROJECT_DIR/lib" ]; then
+    mkdir -p "$PROJECT_DIR/lib"
 fi
 
 command cd "$PROJECT_DIR"/lib
 
 if [ ! -d "py9b" ]; then
   git clone https://github.com/mzweigert/py9b
+  command cd py9b
+  cp -r py9b "$PROJECT_DIR"/src/
 else
   command cd py9b
   git pull
+  cp -r py9b "$PROJECT_DIR"/src/
   cd ..
 fi
