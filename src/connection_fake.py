@@ -13,6 +13,14 @@ class RecoveryEnergyMode(enum.Enum):
     Medium = 1
     Strong = 2
 
+    def next_val(self):
+        if self == RecoveryEnergyMode.Weak:
+            return RecoveryEnergyMode.Medium
+        elif self == RecoveryEnergyMode.Medium:
+            return RecoveryEnergyMode.Strong
+        else:
+            return RecoveryEnergyMode.Weak
+
 
 def randint(from_range, to_range):
     return random.randint(from_range, to_range)
@@ -66,5 +74,3 @@ class XiaomiBLEBaseConnection:
 
     def get_recovery_energy(self):
         return self.mode
-
-

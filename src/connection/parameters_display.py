@@ -1,10 +1,7 @@
+from scooter_connection import XiaomiBLEBaseConnection
 from display.base_display import BaseDisplay
 from display.progress_bar import ProgressBar
 from PIL import ImageFont
-
-from connection_fake import XiaomiBLEBaseConnection
-
-# from py9b.connection.xiaomi_ble_connection import XiaomiBLEBaseConnection, RecoveryEnergyMode
 
 font_path = '/usr/share/fonts/truetype/orbitron/Orbitron-Black.ttf'
 info_font = ImageFont.truetype(font_path, 15)
@@ -13,9 +10,9 @@ battery_info_font = ImageFont.truetype(font_path, 9)
 
 
 class ParametersDisplay:
-    def __init__(self, connection: XiaomiBLEBaseConnection):
-        self.__display = BaseDisplay()
-        self.__battery_info_bar = ProgressBar(self.__display, font=battery_info_font, top=58)
+    def __init__(self, connection: XiaomiBLEBaseConnection, display: BaseDisplay):
+        self.__display = display
+        self.__battery_info_bar = ProgressBar(self.__display, font=battery_info_font, top=56)
         self.__connection = connection
 
         self.__speed_info_top = 20

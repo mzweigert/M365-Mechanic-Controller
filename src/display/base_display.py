@@ -2,6 +2,7 @@ import board
 import digitalio
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_ssd1306
+from time import sleep
 
 
 class BaseDisplay(object):
@@ -9,11 +10,19 @@ class BaseDisplay(object):
     def __init__(self, font=None):
         reset_pin = digitalio.DigitalInOut(board.D4)
         self._oled = adafruit_ssd1306.SSD1306_I2C(128, 64, board.I2C(), addr=0x3c, reset=reset_pin)
-        self._image = Image.new('1', (self._oled.width, self._oled.height))
-        self._draw = ImageDraw.Draw(self._image)
+        self.__init_image()
         self._font = font
 
         self.clear_display()
+
+    def clear_display(self):
+        self.__init_image()
+        self._oled.fill(0)
+        self._oled.show()
+
+    def __init_image(self):
+        self._image = Image.new('1', (self._oled.width, self._oled.height))
+        self._draw = ImageDraw.Draw(self._image)
 
     def get_width(self):
         return self._oled.width
@@ -23,10 +32,6 @@ class BaseDisplay(object):
 
     def get_font(self):
         return self._font
-
-    def clear_display(self):
-        self._oled.fill(0)
-        self._oled.show()
 
     def clear_area(self, x, y, width, height):
         self.prepare_rectangle_to_draw(x, y, width, height, False, False)
@@ -44,4 +49,4 @@ class BaseDisplay(object):
         self._oled.show()
 
     def prepare_text_to_draw(self, x, y, text, font=None, fill=255):
-        self._draw.text((x, y), text, font=font or self._font, fill=1)
+        self._draw.text((x, y), text, font=font or self._font, fill=fill)
