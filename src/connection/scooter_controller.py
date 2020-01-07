@@ -39,7 +39,7 @@ class ScooterController:
         try:
             if not self.__buttons_controller.is_display_blocked():
                 self.__parameters_display.show()
-            else:
+            elif self.__buttons_controller.can_invoke_action():
                 self.__buttons_controller.invoke_action_and_unlock_display()
                 self.__parameters_display = ParametersDisplay(self.__connection, self.__display)
 
