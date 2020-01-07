@@ -77,6 +77,9 @@ class ButtonsController:
     def is_display_blocked(self):
         return self.__display_blocked
 
+    def can_invoke_action(self):
+        return bool(self.__action_btn)
+
     def invoke_action_and_unlock_display(self):
         if not self.__action_btn:
             return
